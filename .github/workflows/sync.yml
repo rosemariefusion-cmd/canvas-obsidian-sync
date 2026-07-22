@@ -1,0 +1,35 @@
+name: Sync Canvas to Obsidian vault
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 minutes (UTC)
+  workflow_dispatch:          # manual "Run workflow" button
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - run: pip install -r requirements.txt
+
+      - run: python canvas_to_obsidian.py
+        env:
+          CANVAS_BASE_URL: ${{ secrets.CANVAS_BASE_URL }}
+          CANVAS_TOKEN: ${{ secrets.CANVAS_TOKEN }}
+          VAULT_DIR: "vault"
+          DAYS_AHEAD: "60"
+
+      # Commit any new/changed notes straight back into the repo.
+      - name: Commit changes
+        run: |
+          git config user.name "canvas-sync-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add vault/
+          git diff --staged --quiet || git commit -m "Sync Canvas assignments"
+          git push
