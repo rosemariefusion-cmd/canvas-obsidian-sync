@@ -4,7 +4,7 @@ canvas_id: "34146258"
 course: "[[Mandarin 2 B (Rosemarie Bhuller)]]"
 due: 2026-08-01
 type: Assignment
-done: false
+done: true
 url: "https://fusion.instructure.com/courses/392709/assignments/34146258"
 ---
 
