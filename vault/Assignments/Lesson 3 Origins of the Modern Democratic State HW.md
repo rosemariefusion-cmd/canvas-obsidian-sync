@@ -4,7 +4,7 @@ canvas_id: "37180141"
 course: "[[HNRS Government (Rosemarie Bhuller)]]"
 due: 2026-08-22
 type: Assignment
-done: false
+done: true
 url: "https://fusion.instructure.com/courses/410409/assignments/37180141"
 ---
 
